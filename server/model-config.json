@@ -41,5 +41,9 @@
   "UserRole": {
     "dataSource": "mongo",
     "public": false
+  },
+  "Document": {
+    "dataSource": "mongo",
+    "public": true
   }
 }

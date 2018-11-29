@@ -3,6 +3,16 @@
   "plural": "users",
   "base": "User",
   "idInjection": true,
+  "indexes": {
+    "uniqueEmail": {
+      "keys": {
+        "email": 1
+      },
+      "options": {
+        "unique": true
+      }
+    }
+  },
   "options": {
     "validateUpsert": true
   },
@@ -40,16 +50,6 @@
     },
     "twitterID": {
       "type": "string"
-    }
-  },
-  "indexes": {
-    "uniqueEmail": {
-      "keys": {
-        "email": 1
-      },
-      "options": {
-        "unique": true
-      }
     }
   },
   "validations": [],
@@ -92,6 +92,27 @@
       "principalId": "$unauthenticated",
       "permission": "ALLOW",
       "property": "registerUser"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW",
+      "property": "facebookLogin"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW",
+      "property": "googleLogin"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW",
+      "property": "twitterLogin"
     }
   ],
   "methods": {}

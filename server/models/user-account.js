@@ -2,14 +2,12 @@
 
 const facebookLogin = require("../handlers/facebook");
 const googleLogin = require("../handlers/google");
-const twitterLogin = require("../handlers/twitter");
 const localSignup = require("../handlers/local");
 
 module.exports = function(UserAccount) {
     
     UserAccount.facebookLogin = facebookLogin(UserAccount);
     UserAccount.googleLogin = googleLogin(UserAccount);
-    UserAccount.twitterLogin = twitterLogin(UserAccount);
     UserAccount.registerUser = localSignup(UserAccount);
 
     UserAccount.beforeRemote("login", async(ctx, result) => {
@@ -33,17 +31,20 @@ module.exports = function(UserAccount) {
     
     UserAccount.afterRemote("login", async (ctx, result) => {
         
-        const user = await UserAccount.find({where: {id: result.userId}, include: ["userRole"]});
+        let user = await UserAccount.find({where: {id: result.userId}, include: ["userRole"]});
+
+        user = user[0];
+
+        user.auth_token = result.id;
         
-        ctx.result.userRole = user[0].userRole;
+        ctx.result = user;
         
     });
     
     UserAccount.remoteMethod("facebookLogin", {
         description: "facebook login",
         accepts: [
-            {arg: "id", type: "string", required: true},
-            {arg: "name", type: "string", required: true}
+            {arg: "auth_token", type: "string", required: true}
         ],
         returns: {
             type: "object",
@@ -58,8 +59,7 @@ module.exports = function(UserAccount) {
     UserAccount.remoteMethod("googleLogin", {
         description: "google login",
         accepts: [
-            {arg: "id", type: "string", required: true},
-            {arg: "name", type: "string", required: true}
+            {arg: "auth_token", type: "string", required: true},
         ],
         returns: {
             type: "object",
@@ -68,22 +68,6 @@ module.exports = function(UserAccount) {
         http: {
             verb: "post",
             path: "/googleLogin"
-        }
-    });
-    
-    UserAccount.remoteMethod("twitterLogin", {
-        description: "twitter login",
-        accepts: [
-            {arg: "id", type: "string", required: true},
-            {arg: "name", type: "string", required: true}
-        ],
-        returns: {
-            type: "object",
-            root: true
-        },
-        http: {
-            verb: "post",
-            path: "/twitterLogin"
         }
     });
     
