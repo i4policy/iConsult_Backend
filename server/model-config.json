@@ -10,6 +10,8 @@
       "loopback/common/mixins",
       "loopback/server/mixins",
       "../common/mixins",
+      "../node_modules/loopback-ds-timestamp-mixin",
+      "../node_modules/loopback-disable-method-mixin",
       "./mixins"
     ]
   },
@@ -33,6 +35,10 @@
     "public": true
   },
   "CustomAccessToken": {
+    "dataSource": "mongo",
+    "public": false
+  },
+  "UserRole": {
     "dataSource": "mongo",
     "public": false
   }

@@ -1,9 +1,14 @@
 'use strict';
 
 var loopback = require('loopback');
+
 var boot = require('loopback-boot');
 
 var app = module.exports = loopback();
+
+require("loopback-disable-method-mixin")(app);
+
+require('loopback-row-count-mixin')(app);
 
 app.start = function() {
   // start the web server
