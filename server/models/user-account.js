@@ -35,10 +35,7 @@ module.exports = function(UserAccount) {
         
         const user = await UserAccount.find({where: {id: result.userId}, include: ["userRole"]});
         
-        ctx.result = {
-            auth_token: result.id,
-            user: user[0]
-        };
+        ctx.result.userRole = user[0].userRole;
         
     });
     
