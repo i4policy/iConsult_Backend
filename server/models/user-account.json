@@ -47,9 +47,6 @@
     },
     "googleID": {
       "type": "string"
-    },
-    "twitterID": {
-      "type": "string"
     }
   },
   "validations": [],

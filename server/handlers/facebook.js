@@ -19,6 +19,10 @@ module.exports = function(UserAccount) {
 
             if (user) {
 
+                let authToken = await user.accessTokens.create({});
+
+                user.auth_token = authToken;
+
                 return user;
 
             }
@@ -44,7 +48,7 @@ module.exports = function(UserAccount) {
 
             user = await UserAccount.findOne({where: {facebookID: data.id}, include: ["userRole"]});
 
-            let accessToken = await user.accessTokens.create({ttl: -1});
+            let accessToken = await user.accessTokens.create();
 
             user.auth_token = accessToken.id;
 
