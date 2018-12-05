@@ -1,6 +1,6 @@
 {
-  "name": "Document",
-  "plural": "documents",
+  "name": "Annotation",
+  "plural": "annotations",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -11,33 +11,26 @@
     "RowCount": true
   },
   "properties": {
-    "title": {
+    "quote": {
       "type": "string",
       "required": true
     },
-    "content": {
-      "type": "string",
+    "ranges": {
+      "type": [
+        "object"
+      ],
       "required": true
     },
-    "draft": {
-      "type": "boolean",
-      "required": true,
-      "default": true
+    "text": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],
   "relations": {
-    "annotations": {
-      "type": "hasMany",
-      "model": "Annotation",
-      "foreignKey": "",
-      "options": {
-        "nestRemoting": true
-      }
-    },
-    "sections": {
-      "type": "hasMany",
-      "model": "Section",
+    "user": {
+      "type": "belongsTo",
+      "model": "UserAccount",
       "foreignKey": "",
       "options": {
         "nestRemoting": true
@@ -52,24 +45,30 @@
       "permission": "DENY"
     },
     {
-      "accessType": "EXECUTE",
+      "accessType": "*",
       "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "ALLOW",
-      "property": "find"
-    },
-    {
-      "accessType": "EXECUTE",
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "ALLOW",
-      "property": "findById"
+      "principalId": "$owner",
+      "permission": "ALLOW"
     },
     {
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$admin",
       "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "create"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "find"
     }
   ],
   "methods": {}

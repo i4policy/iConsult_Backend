@@ -45,5 +45,17 @@
   "Document": {
     "dataSource": "mongo",
     "public": true
+  },
+  "Annotation": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "Section": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "Answer": {
+    "dataSource": "mongo",
+    "public": true
   }
 }

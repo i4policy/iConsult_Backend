@@ -21,7 +21,7 @@ module.exports = function(UserAccount) {
 
                 let authToken = await user.accessTokens.create({});
 
-                user.auth_token = authToken;
+                user.auth_token = authToken.id;
 
                 return user;
 
