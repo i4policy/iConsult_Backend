@@ -47,6 +47,11 @@
     },
     "googleID": {
       "type": "string"
+    },
+    "banned": {
+      "type": "boolean",
+      "required": true,
+      "default": false
     }
   },
   "validations": [],
