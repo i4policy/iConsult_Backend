@@ -1,6 +1,6 @@
 {
-  "name": "Section",
-  "plural": "sections",
+  "name": "Comment",
+  "plural": "comments",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -11,10 +11,6 @@
     "RowCount": true
   },
   "properties": {
-    "title": {
-      "type": "string",
-      "required": true
-    },
     "content": {
       "type": "string",
       "required": true
@@ -22,23 +18,18 @@
   },
   "validations": [],
   "relations": {
-    "answers": {
-      "type": "hasMany",
-      "model": "Answer",
-      "foreignKey": ""
-    },
-    "comments": {
-      "type": "hasMany",
-      "model": "Comment",
+    "section": {
+      "type": "belongsTo",
+      "model": "Section",
       "foreignKey": "",
       "options": {
         "nestRemoting": true
       }
     },
-    "reviews": {
-      "type": "hasMany",
-      "model": "Review",
-      "foreignKey": "",
+    "userAccount": {
+      "type": "belongsTo",
+      "model": "UserAccount",
+      "foreignKey": "userId",
       "options": {
         "nestRemoting": true
       }

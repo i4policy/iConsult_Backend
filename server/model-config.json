@@ -54,7 +54,11 @@
     "dataSource": "mongo",
     "public": true
   },
-  "Answer": {
+  "Comment": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "Review": {
     "dataSource": "mongo",
     "public": true
   }

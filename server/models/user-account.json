@@ -18,6 +18,7 @@
   },
   "mixins": {
     "TimeStamp": true,
+    "RowCount": true,
     "DisableMethods": {
       "expose": [
         "find",

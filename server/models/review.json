@@ -1,18 +1,19 @@
 {
-  "name": "Answer",
-  "plural": "answers",
+  "name": "Review",
+  "plural": "reviews",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
+  "mixins": {
+    "TimeStamp": true,
+    "RowCount": true
+  },
   "properties": {
-    "review": {
+    "content": {
       "type": "string",
       "required": true
-    },
-    "comment": {
-      "type": "string"
     }
   },
   "validations": [],
@@ -24,6 +25,11 @@
       "options": {
         "nestRemoting": true
       }
+    },
+    "userAccount": {
+      "type": "belongsTo",
+      "model": "UserAccount",
+      "foreignKey": "userId"
     }
   },
   "acls": [],
