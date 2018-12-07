@@ -20,7 +20,7 @@ module.exports = function(UserAccount) {
             to: info.email,
             from: "support@i4policy.org",
             subject: "Password reset request",
-            html: `Please follow the following <a href="http://localhost:8080/app/#/reset?access_token=${info.accessToken.id}">Password Reset</a> link to reset your password`
+            html: `Please follow the following <a href="https://manifesto.i4policy.org/app/#/reset?access_token=${info.accessToken.id}">Password Reset</a> link to reset your password`
         }, function(err) {
             if (err) throw err;
         });
