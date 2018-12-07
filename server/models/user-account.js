@@ -4,6 +4,7 @@ const facebookLogin = require("../handlers/facebook");
 const googleLogin = require("../handlers/google");
 const localSignup = require("../handlers/local");
 const registerAdminUser = require("../handlers/admin-register");
+const passwordReset = require("../handlers/password-reset");
 
 module.exports = function(UserAccount) {
     
@@ -11,6 +12,8 @@ module.exports = function(UserAccount) {
     UserAccount.googleLogin = googleLogin(UserAccount);
     UserAccount.registerUser = localSignup(UserAccount);
     UserAccount.registerAdminUser = registerAdminUser(UserAccount);
+
+    UserAccount.on("resetPasswordRequest", passwordReset(UserAccount));
 
     UserAccount.beforeRemote("login", async(ctx, result) => {
 
