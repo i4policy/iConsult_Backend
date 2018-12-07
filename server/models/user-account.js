@@ -3,12 +3,14 @@
 const facebookLogin = require("../handlers/facebook");
 const googleLogin = require("../handlers/google");
 const localSignup = require("../handlers/local");
+const registerAdminUser = require("../handlers/admin-register");
 
 module.exports = function(UserAccount) {
     
     UserAccount.facebookLogin = facebookLogin(UserAccount);
     UserAccount.googleLogin = googleLogin(UserAccount);
     UserAccount.registerUser = localSignup(UserAccount);
+    UserAccount.registerAdminUser = registerAdminUser(UserAccount);
 
     UserAccount.beforeRemote("login", async(ctx, result) => {
 
@@ -89,6 +91,25 @@ module.exports = function(UserAccount) {
         },
         
         http: { verb: "post", path: "/sign-up" }
+        
+    });
+    
+    UserAccount.remoteMethod("registerAdminUser", {
+        
+        description: "admin user registration method",
+        
+        accepts: [
+            { arg: "name", type: "string", required: true },
+            { arg: "email", type: "string", required: true },
+            { arg: "password", type: "string", required: true }
+        ],
+        
+        returns: {
+            type: "object",
+            root: true
+        },
+        
+        http: { verb: "post", path: "/register-admin" }
         
     });
     

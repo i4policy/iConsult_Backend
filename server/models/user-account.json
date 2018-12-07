@@ -116,6 +116,12 @@
       "principalId": "$unauthenticated",
       "permission": "ALLOW",
       "property": "twitterLogin"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$admin",
+      "permission": "ALLOW"
     }
   ],
   "methods": {}
