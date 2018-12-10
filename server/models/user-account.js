@@ -116,5 +116,23 @@ module.exports = function(UserAccount) {
         
     });
     
+    UserAccount.remoteMethod("userResponse", {
+        
+        description: "compiled user response method",
+        
+        accepts: [
+            { arg: "documentId", type: "string", required: true },
+            { arg: "options", type: "object", required: true }
+        ],
+        
+        returns: {
+            type: "object",
+            root: true
+        },
+        
+        http: { verb: "post", path: "/response" }
+        
+    });
+    
     
 };
