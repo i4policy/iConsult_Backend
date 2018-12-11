@@ -5,6 +5,7 @@ const googleLogin = require("../handlers/google");
 const localSignup = require("../handlers/local");
 const registerAdminUser = require("../handlers/admin-register");
 const passwordReset = require("../handlers/password-reset");
+const userResponse = require("../handlers/user-response");
 
 module.exports = function(UserAccount) {
     
@@ -12,6 +13,8 @@ module.exports = function(UserAccount) {
     UserAccount.googleLogin = googleLogin(UserAccount);
     UserAccount.registerUser = localSignup(UserAccount);
     UserAccount.registerAdminUser = registerAdminUser(UserAccount);
+    UserAccount.userResponse = userResponse(UserAccount);
+
 
     UserAccount.on("resetPasswordRequest", passwordReset(UserAccount));
 
@@ -122,7 +125,7 @@ module.exports = function(UserAccount) {
         
         accepts: [
             { arg: "documentId", type: "string", required: true },
-            { arg: "options", type: "object", required: true }
+            { arg: "options", type: "object", http: "optionsFromRequest" }
         ],
         
         returns: {

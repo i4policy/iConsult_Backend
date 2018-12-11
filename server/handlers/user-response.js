@@ -6,19 +6,25 @@ module.exports = function (UserAccount) {
         let userId = options.accessToken.userId;
 
         let filter = {
-            documentId: documentId,
-            userId: userId
+            where: {
+                documentId: documentId,
+                userId: userId
+            }
         };
 
         let annotations = await Annotation.find(filter);
 
-        delete filter.documentId;
+        delete filter.where.documentId;
 
         let reviews = await Review.find(filter);
 
         let comments = await Comment.find(filter);
 
-        console.log(annotations, reviews, comments);
+        return {
+            annotations: annotations,
+            comments: comments,
+            reviews: reviews
+        };
 
     };
 }

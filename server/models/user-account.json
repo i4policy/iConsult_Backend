@@ -28,7 +28,8 @@
         "registerAdminUser",
         "facebookLogin",
         "googleLogin",
-        "twitterLogin"
+        "twitterLogin",
+        "userResponse"
       ],
       "hide": [
         "reset",
@@ -122,6 +123,13 @@
       "principalType": "ROLE",
       "principalId": "$admin",
       "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "userResponse"
     }
   ],
   "methods": {}
