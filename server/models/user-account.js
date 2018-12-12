@@ -6,6 +6,7 @@ const localSignup = require("../handlers/local");
 const registerAdminUser = require("../handlers/admin-register");
 const passwordReset = require("../handlers/password-reset");
 const userResponse = require("../handlers/user-response");
+const botLogin = require("../handlers/bot-login");
 
 module.exports = function(UserAccount) {
     
@@ -14,6 +15,7 @@ module.exports = function(UserAccount) {
     UserAccount.registerUser = localSignup(UserAccount);
     UserAccount.registerAdminUser = registerAdminUser(UserAccount);
     UserAccount.userResponse = userResponse(UserAccount);
+    UserAccount.botLogin = botLogin(UserAccount);
 
 
     UserAccount.on("resetPasswordRequest", passwordReset(UserAccount));
@@ -61,6 +63,22 @@ module.exports = function(UserAccount) {
         http: {
             verb: "post",
             path: "/facebookLogin"
+        }
+    });
+    
+    UserAccount.remoteMethod("botLogin", {
+        description: "facebook bot login",
+        accepts: [
+            {arg: "name", type: "string", required: true},
+            {arg: "id", type: "string", required: true}
+        ],
+        returns: {
+            type: "object",
+            root: true
+        },
+        http: {
+            verb: "post",
+            path: "/botLogin"
         }
     });
     
