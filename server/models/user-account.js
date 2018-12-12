@@ -133,7 +133,7 @@ module.exports = function(UserAccount) {
             root: true
         },
         
-        http: { verb: "post", path: "/response" }
+        http: { verb: "get", path: "/response" }
         
     });
     
