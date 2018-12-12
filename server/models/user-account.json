@@ -29,7 +29,8 @@
         "facebookLogin",
         "googleLogin",
         "twitterLogin",
-        "userResponse"
+        "userResponse",
+        "botLogin"
       ],
       "hide": [
         "reset",
