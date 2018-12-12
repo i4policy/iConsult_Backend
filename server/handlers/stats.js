@@ -1,9 +1,11 @@
 module.exports = function(Document) {
     return async function(documentId, options) {
 
-        let data = {};
+        let data = {
+            sections: {}
+        };
 
-        const { Section } = Document.app.models;
+        const { Section, Annotation } = Document.app.models;
 
         const { Comment, Review } = Section.app.models;
 
@@ -12,6 +14,14 @@ module.exports = function(Document) {
                 documentId: documentId
             }
         });
+
+        let annotations = await Annotation.find({
+            where: {
+                documentId: documentId
+            }
+        });
+
+        data["totalAnnotations"] = annotations.length;
 
         for (let i in sections) {
 
@@ -33,7 +43,7 @@ module.exports = function(Document) {
 
             cc = cc.length;
 
-            data[section.title] = {
+            data.sections[section.title] = {
                 reviews: rc,
                 comments: cc,
                 totalEngagement: rc + cc
