@@ -131,6 +131,13 @@
       "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": "userResponse"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW",
+      "property": "botLogin"
     }
   ],
   "methods": {}
