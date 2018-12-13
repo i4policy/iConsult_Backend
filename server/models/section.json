@@ -42,6 +42,11 @@
       "options": {
         "nestRemoting": true
       }
+    },
+    "rates": {
+      "type": "hasMany",
+      "model": "Rate",
+      "foreignKey": ""
     }
   },
   "acls": [],

@@ -3,6 +3,17 @@
   "plural": "comments",
   "base": "PersistedModel",
   "idInjection": true,
+  "indexes": {
+    "uniqueComment": {
+      "keys": {
+        "userId": 1,
+        "sectionId": -1
+      },
+      "options": {
+        "unique": true
+      }
+    }
+  },
   "options": {
     "validateUpsert": true
   },
@@ -36,16 +47,5 @@
     }
   },
   "acls": [],
-  "methods": {},
-  "indexes": {
-    "uniqueComment": {
-      "keys": {
-        "userId": 1,
-        "sectionId": -1
-      },
-      "options": {
-        "unique": true
-      }
-    }
-  }
+  "methods": {}
 }

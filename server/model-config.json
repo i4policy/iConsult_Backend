@@ -64,5 +64,9 @@
   },
   "Email": {
     "dataSource": "postmark"
+  },
+  "Rate": {
+    "dataSource": "mongo",
+    "public": true
   }
 }

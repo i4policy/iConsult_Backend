@@ -3,6 +3,17 @@
   "plural": "reviews",
   "base": "PersistedModel",
   "idInjection": true,
+  "indexes": {
+    "uniqueReview": {
+      "keys": {
+        "userId": 1,
+        "sectionId": -1
+      },
+      "options": {
+        "unique": true
+      }
+    }
+  },
   "options": {
     "validateUpsert": true
   },
@@ -33,16 +44,5 @@
     }
   },
   "acls": [],
-  "methods": {},
-  "indexes": {
-    "uniqueReview": {
-      "keys": {
-        "userId": 1,
-        "sectionId": -1
-      },
-      "options": {
-        "unique": true
-      }
-    }
-  }
+  "methods": {}
 }
