@@ -43,7 +43,7 @@
         "nestRemoting": true
       }
     },
-    "rates": {
+    "ratings": {
       "type": "hasMany",
       "model": "Rate",
       "foreignKey": ""

@@ -1,10 +1,21 @@
 {
   "name": "Rate",
-  "plural": "rates",
+  "plural": "ratings",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
+  },
+  "indexes": {
+    "uniqueRating": {
+      "keys": {
+        "userId": 1,
+        "sectionId": -1
+      },
+      "options": {
+        "unique": true
+      }
+    }
   },
   "properties": {
     "content": {
@@ -33,17 +44,17 @@
   },
   "acls": [
     {
-      "accessType": "EXECUTE",
-      "principalType": "ROLE",
-      "principalId": "$authenticated",
-      "permission": "ALLOW",
-      "property": "create"
-    },
-    {
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "upsertWithWhere"
     },
     {
       "accessType": "*",
