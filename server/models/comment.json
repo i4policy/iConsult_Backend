@@ -36,5 +36,16 @@
     }
   },
   "acls": [],
-  "methods": {}
+  "methods": {},
+  "indexes": {
+    "uniqueComment": {
+      "keys": {
+        "userId": 1,
+        "sectionId": -1
+      },
+      "options": {
+        "unique": true
+      }
+    }
+  }
 }
