@@ -26,7 +26,7 @@ module.exports = function(Document) {
             root: true
         },
         
-        http: { verb: "get", path: "/stats" }
+        http: { verb: "get", path: "/:documentId/stats" }
         
     });
     
@@ -62,7 +62,7 @@ module.exports = function(Document) {
             root: true
         },
         
-        http: { verb: "get", path: "/:id/clone" }
+        http: { verb: "get", path: "/:documentId/clone" }
         
     });
 
