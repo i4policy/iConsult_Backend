@@ -58,10 +58,6 @@
     "dataSource": "mongo",
     "public": true
   },
-  "Review": {
-    "dataSource": "mongo",
-    "public": true
-  },
   "Email": {
     "dataSource": "postmark"
   },
