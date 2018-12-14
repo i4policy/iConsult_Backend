@@ -7,7 +7,7 @@ module.exports = function(Document) {
         
         const { Section, Annotation } = Document.app.models;
         
-        const { Comment, Review, Rate } = Section.app.models;
+        const { Comment, Rate } = Section.app.models;
         
         let sections = await Section.find({
             where: {
@@ -27,12 +27,6 @@ module.exports = function(Document) {
             
             let section = sections[i];
             
-            let rc = await Review.find({
-                where: {
-                    sectionId: section.id
-                }
-            });
-            
             let cc = await Comment.find({
                 where: {
                     sectionId: section.id
@@ -49,8 +43,6 @@ module.exports = function(Document) {
                 return accumlator + value.content;
             }, 0);
             
-            rc = rc.length;
-            
             cc = cc.length;
 
             rac = rac.length;
@@ -58,11 +50,10 @@ module.exports = function(Document) {
             let averageRating = Math.round(totalRating / rac);
             
             data.sections[section.title] = {
-                reviews: rc,
                 comments: cc,
                 ratings: rac,
                 averageRating: averageRating,
-                totalEngagement: rc + cc + rac
+                totalEngagement: cc + rac
             };
             
         }
