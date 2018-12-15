@@ -1,0 +1,25 @@
+{
+  "name": "DocumentRate",
+  "plural": "document_ratings",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "content": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "document": {
+      "type": "belongsTo",
+      "model": "Document",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

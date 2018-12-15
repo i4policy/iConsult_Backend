@@ -76,6 +76,16 @@
       "type": "hasMany",
       "model": "UserAccount",
       "foreignKey": ""
+    },
+    "documentComments": {
+      "type": "hasMany",
+      "model": "DocumentComment",
+      "foreignKey": "userId"
+    },
+    "documentRates": {
+      "type": "hasMany",
+      "model": "DocumentRate",
+      "foreignKey": "userId"
     }
   },
   "acls": [

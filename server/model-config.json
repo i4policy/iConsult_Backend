@@ -64,5 +64,13 @@
   "Rate": {
     "dataSource": "mongo",
     "public": true
+  },
+  "DocumentRate": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "DocumentComment": {
+    "dataSource": "mongo",
+    "public": true
   }
 }
