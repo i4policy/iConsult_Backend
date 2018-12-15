@@ -6,6 +6,17 @@
   "options": {
     "validateUpsert": true
   },
+  "indexes": {
+    "uniqueDocumentComment": {
+      "keys": {
+        "userId": 1,
+        "documentId": -1
+      },
+      "options": {
+        "unique": true
+      }
+    }
+  },
   "properties": {
     "content": {
       "type": "string",
