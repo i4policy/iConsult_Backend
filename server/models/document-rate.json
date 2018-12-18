@@ -3,9 +3,6 @@
   "plural": "document_ratings",
   "base": "PersistedModel",
   "idInjection": true,
-  "options": {
-    "validateUpsert": true
-  },
   "indexes": {
     "uniqueDocumentRating": {
       "keys": {
@@ -16,6 +13,9 @@
         "unique": true
       }
     }
+  },
+  "options": {
+    "validateUpsert": true
   },
   "properties": {
     "content": {
