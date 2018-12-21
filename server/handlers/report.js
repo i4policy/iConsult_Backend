@@ -3,7 +3,7 @@ module.exports = function(Document) {
 
         const { Section } = Document.app.models;
 
-        const { Review, Comment } = Section.app.models;
+        const { Comment, Rate } = Section.app.models;
 
         const { UserAccount } = Section.app.models;
 
@@ -34,18 +34,18 @@ module.exports = function(Document) {
                     }
                 };
 
-                let review = await Review.find(filter);
-
                 let comment = await Comment.find(filter);
-
-                review = review[0] ? review[0].content : "Not Provided";
+                
+                let rate = await Rate.find(filter);
 
                 comment = comment[0] ? comment[0].content : "Not Provided";
+
+                rate = rate[0] ? rate[0].content : "Not Provided";
 
                 data[section.title].push({
                     userId: user.id,
                     comment: comment,
-                    review: review
+                    rate: rate
                 });
 
             }
