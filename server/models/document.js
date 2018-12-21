@@ -36,7 +36,7 @@ module.exports = function(Document) {
         
         accepts: [
             { arg: "documentId", type: "string", required: true },
-            { arg: "options", type: "object", http: "optionsFromRequest" }
+            { arg: "res", type: "object", http: {source: "res"}}
         ],
         
         returns: {
@@ -44,7 +44,7 @@ module.exports = function(Document) {
             root: true
         },
         
-        http: { verb: "get", path: "/report" }
+        http: { verb: "get", path: "/:documentId/report" }
         
     });
     
