@@ -22,6 +22,21 @@ function zipFolder(folder) {
     })
 }
 
+function requestDownload(res, file) {
+
+    return new Promise((resolve, reject) => {
+      
+        res.download(file, file, function(err) {
+
+            if (err) return reject(err);
+
+            resolve();
+
+        });  
+
+    })
+}
+
 module.exports = function(Document) {
     return async function (documentId, res) {
         
@@ -122,7 +137,7 @@ module.exports = function(Document) {
 
         res.status(200);
 
-        res.download(`./${now}.zip`);
+        await requestDownload(res, `./${now}.zip`);
         
     };
 };
