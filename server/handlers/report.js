@@ -25,7 +25,7 @@ function zipFolder(folder) {
 module.exports = function(Document) {
     return async function (documentId, res) {
         
-        const { Section } = Document.app.models;
+        const { Section, DocumentRate, DocumentComment } = Document.app.models;
         
         const { Comment, Rate } = Section.app.models;
         
@@ -42,6 +42,10 @@ module.exports = function(Document) {
                 documentId: documentId
             }
         });
+
+        let document = await Document.findById(documentId);
+
+        data[document.title] = [];
         
         let users = await UserAccount.find({});
         
@@ -65,10 +69,34 @@ module.exports = function(Document) {
                 let comment = await Comment.find(filter);
                 
                 let rate = await Rate.find(filter);
+
+                let documentComment = await DocumentComment.find({
+                    where: {
+                        documentId: documentId,
+                        userId: user.id
+                    }
+                });
+
+                let documentRate = await DocumentRate.find({
+                    where: {
+                        documentId: documentId,
+                        userId: user.id
+                    }
+                });
                 
                 comment = comment[0] ? comment[0].content : "Not Provided";
                 
                 rate = rate[0] ? rate[0].content : "Not Provided";
+
+                documentComment = documentComment[0] ? documentComment[0].content : "Not Provided";
+
+                documentRate = documentRate[0] ? documentRate[0].content : "Not Provided";
+
+                data[document.title].push({
+                    userId: user.id.toString(),
+                    comment: documentComment,
+                    rate: documentRate
+                });
                 
                 data[section.title].push({
                     userId: user.id.toString(),
@@ -81,14 +109,18 @@ module.exports = function(Document) {
             let csv = await converter.json2csvPromisified(data[section.title]);
             
             await writeFile(`${now}/${section.title}.csv`, csv);
+
+            csv = await converter.json2csvPromisified(data[document.title]);
+
+            await writeFile(`${now}/${document.title}.csv`, csv);
             
         }
 
-        zipFolder(`./${now}`);
+        await zipFolder(`./${now}`);
 
-        let reader = fs.createReadStream(`./${now}.zip`);
+        res.type("application/zip");
 
-        res.type("application/octet-stream");
+        res.status(200);
 
         res.download(`./${now}.zip`);
         
