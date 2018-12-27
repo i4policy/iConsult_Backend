@@ -84,34 +84,10 @@ module.exports = function(Document) {
                 let comment = await Comment.find(filter);
                 
                 let rate = await Rate.find(filter);
-
-                let documentComment = await DocumentComment.find({
-                    where: {
-                        documentId: documentId,
-                        userId: user.id
-                    }
-                });
-
-                let documentRate = await DocumentRate.find({
-                    where: {
-                        documentId: documentId,
-                        userId: user.id
-                    }
-                });
                 
                 comment = comment[0] ? comment[0].content : "Not Provided";
                 
                 rate = rate[0] ? rate[0].content : "Not Provided";
-
-                documentComment = documentComment[0] ? documentComment[0].content : "Not Provided";
-
-                documentRate = documentRate[0] ? documentRate[0].content : "Not Provided";
-
-                data[document.title].push({
-                    userId: user.id.toString(),
-                    comment: documentComment,
-                    rate: documentRate
-                });
                 
                 data[section.title].push({
                     userId: user.id.toString(),
@@ -124,12 +100,42 @@ module.exports = function(Document) {
             let csv = await converter.json2csvPromisified(data[section.title]);
             
             await writeFile(`${now}/${section.title}.csv`, csv);
-
-            csv = await converter.json2csvPromisified(data[document.title]);
-
-            await writeFile(`${now}/${document.title}.csv`, csv);
             
         }
+
+        for (let i in users) {
+                
+            let user = users[i];
+
+            let documentComment = await DocumentComment.find({
+                where: {
+                    documentId: documentId,
+                    userId: user.id
+                }
+            });
+
+            let documentRate = await DocumentRate.find({
+                where: {
+                    documentId: documentId,
+                    userId: user.id
+                }
+            });
+            
+            documentComment = documentComment[0] ? documentComment[0].content : "Not Provided";
+
+            documentRate = documentRate[0] ? documentRate[0].content : "Not Provided";
+
+            data[document.title].push({
+                userId: user.id.toString(),
+                comment: documentComment,
+                rate: documentRate
+            });
+            
+        }
+
+        let csv = await converter.json2csvPromisified(data[document.title]);
+
+        await writeFile(`${now}/${document.title}.csv`, csv);
 
         await zipFolder(`./${now}`);
 
